@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-150 -150 300 300">
+  <defs>
+    <!-- Gradient for the iridescent effect -->
+    <linearGradient id="surfaceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffff">
+        <animate attributeName="stop-color" 
+          values="#00ffff;#7b2ff7;#00ffff"
+          dur="5s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" stop-color="#7b2ff7">
+        <animate attributeName="stop-color"
+          values="#7b2ff7;#00ffff;#7b2ff7"
+          dur="5s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <!-- Grid pattern for the surface -->
+    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Animated morphing paths -->
+  <g>
+    <!-- Base surface -->
+    <path d="M-100,0 C-80,-80 -40,-100 0,-60 C40,-20 80,-80 100,0 C80,80 40,100 0,60 C-40,20 -80,80 -100,0">
+      <animate attributeName="d" 
+        values="
+          M-100,0 C-80,-80 -40,-100 0,-60 C40,-20 80,-80 100,0 C80,80 40,100 0,60 C-40,20 -80,80 -100,0;
+          M-100,20 C-60,-60 -20,-80 0,-40 C20,0 60,-60 80,20 C60,100 20,80 0,40 C-20,0 -60,60 -100,20;
+          M-100,0 C-80,-80 -40,-100 0,-60 C40,-20 80,-80 100,0 C80,80 40,100 0,60 C-40,20 -80,80 -100,0"
+        dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="opacity"
+        values="0.8;0.6;0.8"
+        dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="stroke-width"
+        values="1;2;1"
+        dur="5s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Additional layers with different animations -->
+    <use href="#surface" transform="scale(0.9)" opacity="0.6">
+      <animate attributeName="transform"
+        values="scale(0.9) rotate(0);scale(0.9) rotate(360)"
+        dur="20s" repeatCount="indefinite"/>
+    </use>
+  </g>
+
+  <!-- Apply gradients and effects -->
+  <g fill="none" stroke="url(#surfaceGradient)" stroke-width="1">
+    <use href="#surface"/>
+    <use href="#surface" transform="rotate(45)" opacity="0.5"/>
+    <use href="#surface" transform="rotate(90)" opacity="0.3"/>
+    <use href="#surface" transform="rotate(135)" opacity="0.2"/>
+  </g>
+
+  <!-- Grid overlay -->
+  <g fill="url(#grid)" opacity="0.2">
+    <use href="#surface"/>
+  </g>
+</svg>
